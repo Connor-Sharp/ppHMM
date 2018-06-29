@@ -56,6 +56,8 @@ def main():
 
 	optional.add_argument("-rc","--Cluster", dest="cluster", metavar="FILE",
 		help='Sequences will be clustered (0.95 seqid) before pfam removal', required=False)
+	optional.add_argument("-s","--Csingle", dest="Single", metavar="FILE",
+		help='Sequences will be clustered (0.95 seqid) before pfam removal', action='store_true',required=False)
 
 	args = parser.parse_args()
 
