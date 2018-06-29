@@ -20,27 +20,27 @@ Additionally, if you want to remove sequences or check what domains are found in
 
 - [Pfam-A.hmmm](https://pfam.xfam.org)
 
-##Introduction
+## Introduction
 
 Nuclease bacteriocins (NBs) are potent antimicrobial proteins which can degrade DNA, tRNA and rRNA. To prevent death of the producing cell, NBs are encoded as a toxin gene followed immediately by a gene encoding an immunity protein. The cytotoxic domains and immunity proteins  contain domains identifiable by pHMMs. The immunity proteins of NBs are always found adjacent to the cytotoxic domain to ensure that an abundance of immunity protein is always in the cell.
 
-##Input
-######Required
-- '-fin' '--file_in' The output file of HMMscan
-- '-fout' '--file_out' Turns the HMMscan into a '.csv' file for easy reading
-- '-g' '--genomes' Directory which stores nucleotide genomes. Each genome should be in its own folder.
-- '-o' '--orf' Directory containing the open reading frame predictions for contigs containing the ppHMM hits
-- '-p' '--profile' "Text file with names of profiles to be identified formatted as: NAME,1st-profile,2nd-profile,inter-profile-distance"
+## Input
+###### Required
+- '''-fin''' '''--file_in''' The output file of HMMscan
+- '''-fout''' '''--file_out''' Turns the HMMscan into a '.csv' file for easy reading
+- '''-g''' '''--genomes''' Directory which stores nucleotide genomes. Each genome should be in its own folder.
+- '''-o''' '''--orf''' Directory containing the open reading frame predictions for contigs containing the ppHMM hits
+- '''-p''' '''--profile''' "Text file with names of profiles to be identified formatted as: NAME,1st-profile,2nd-profile,inter-profile-distance"
 
-######Optional
-- '-m' --'meta' Metadata file. Allows ppHMM to find genome files if filenames differ. Also contains species and other information
-- '-r' Pfam HMM file with binaries. Gives the user the option to remove sequences based on the Pfam domains they contain
-- 'rc' Pfam HMM file with binaries. Clusters the sequences at 98% sequence identity using cd-hit and removes entire clusters based on Pfam domains
+###### Optional
+- '''-m''' '''--meta''' Metadata file. Allows ppHMM to find genome files if filenames differ. Also contains species and other information
+- ''-r'' Pfam HMM file with binaries. Gives the user the option to remove sequences based on the Pfam domains they contain
+- '''-rc''' Pfam HMM file with binaries. Clusters the sequences at 98% sequence identity using cd-hit and removes entire clusters based on Pfam domains
 
-'-fin'
-ppHMM Does not perform the HMMscan itself. To identify the two pHMMs, hmmscan should be used on a whole genome translation in all 6 frames 'transeq -sequence genome.fa -outseq 6frame.fa -clean -table 11 -frame 6'. The output of hmmscan should be in the '--domtblout' form. If large databases are being scanned hmmscan outputs should be concatenated with a '#' separating results.
+'''-fin'''
+ppHMM Does not perform the HMMscan itself. To identify the two pHMMs, hmmscan should be used on a whole genome translation in all 6 frames '''transeq -sequence genome.fa -outseq 6frame.fa -clean -table 11 -frame 6'''. The output of hmmscan should be in the '''--domtblout''' form. If large databases are being scanned hmmscan outputs should be concatenated with a '''#''' separating results.
 
-'-p'
+'''-p'''
 A comma separated file containing the 'NAME' of the profile, the N-pHMM (e.g. NB cytotoxic domain), the C-pHMM (e.g. NB immunity protein), the maximum intergenic region allowed (bp) e.g.
 
 '''
@@ -48,10 +48,10 @@ HNH,Colicin-DNase,Colicin_Pyocin,60
 ColD,Colicin_D,Colicin_immun,60
 '''
 
-'-r'
+'''-r'''
 If the user is only interested in a certain family of proteins that contain the ppHMM, they have the option to remove sequences which contain different pHMMs. If this option is selected all identified sequences are scanned against Pfam-A. A GUI will appear asking the user to identify Pfam domains that they **DO NOT** want included in the final database.
 
-'-rc'
+'''-rc'''
 
 Open reading frames often make mistakes at the N-terminus. As this region can contain important information about toxin secretion pathways, sequences are clustered at 98% sequence identity and the profiles of the longest sequence are used to include to remove the entire cluster. Gives increased accuracy but can remove some allowed sequences.
 
