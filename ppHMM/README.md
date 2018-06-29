@@ -58,7 +58,7 @@ If the user is only interested in a certain family of proteins that contain the 
 
 Open reading frames often make mistakes at the N-terminus. As this region can contain important information about toxin secretion pathways, sequences are clustered at 98% sequence identity and the profiles of the longest sequence are used to include to remove the entire cluster. Gives increased accuracy but can remove some allowed sequences.
 
-##Outputs
+## Outputs
 
 The ppHMM will output a summary html containing some basic statistics of the run and a comma separated file of all the hits identified. The html will incorporate a couple of handy plots of the data which are also available as '.svg' files. All of these files will be placed into a directory created when you run the script. The directory will be named after the time of the run. If multiple runs are being performed at the same time then they will be created with an additional suffix do _N until a unique filename is achieved. Output will also include four fasta files of sequences which have passed and failed the profile inspection, one for each profile in the ppHMM pair (if your profiles are in the same ORF it will return the C-terminal ORF).
 
