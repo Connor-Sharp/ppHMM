@@ -1,0 +1,2 @@
+HNH,Colicin-DNase,Colicin_Pyocin,60
+ColD,Colicin_D,Colicin_immun,60
