@@ -38,9 +38,11 @@ Nuclease bacteriocins (NBs) are potent antimicrobial proteins which can degrade 
 - ```-rc``` Pfam HMM file with binaries. Clusters the sequences at 98% sequence identity using cd-hit and removes entire clusters based on Pfam domains
 
 ```-fin```
+
 ppHMM Does not perform the HMMscan itself. To identify the two pHMMs, hmmscan should be used on a whole genome translation in all 6 frames ```transeq -sequence genome.fa -outseq 6frame.fa -clean -table 11 -frame 6```. The output of hmmscan should be in the ```--domtblout``` form. If large databases are being scanned hmmscan outputs should be concatenated with a ```#``` separating results.
 
 ```-p```
+
 A comma separated file containing the 'NAME' of the profile, the N-pHMM (e.g. NB cytotoxic domain), the C-pHMM (e.g. NB immunity protein), the maximum intergenic region allowed (bp) e.g.
 
 ```
@@ -49,6 +51,7 @@ ColD,Colicin_D,Colicin_immun,60
 ```
 
 ```-r```
+
 If the user is only interested in a certain family of proteins that contain the ppHMM, they have the option to remove sequences which contain different pHMMs. If this option is selected all identified sequences are scanned against Pfam-A. A GUI will appear asking the user to identify Pfam domains that they **DO NOT** want included in the final database.
 
 ```-rc```
