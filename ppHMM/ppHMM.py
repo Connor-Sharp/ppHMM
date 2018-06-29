@@ -56,7 +56,7 @@ def main():
 
 	optional.add_argument("-rc","--Cluster", dest="cluster", metavar="FILE",
 		help='Sequences will be clustered (0.95 seqid) before pfam removal', required=False)
-	optional.add_argument("-s","--Csingle", dest="Single", metavar="FILE",
+	optional.add_argument("-s","--single", dest="single", metavar="FILE",
 		help='Sequences will be clustered (0.95 seqid) before pfam removal', action='store_true',required=False)
 
 	args = parser.parse_args()
@@ -109,10 +109,9 @@ def main():
 	object_array = analyse(object_array, args.myFilenameOut, profileDict, logFile, outputDir)
 
 	from functions import plot_dist
-	plot_dist(object_array,profileDict,outputDir,logFile)
+	plot_dist(object_array,profileDict,outputDir,logFile, args)
 
-	#from functions import addBIGSspecies
-	#addBIGSspecies(object_array, args, logger)
+
 
 
 	from functions import profilesClass

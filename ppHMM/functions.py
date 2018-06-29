@@ -89,35 +89,39 @@ def analyse(object_array,filename, profilesDict, logFile, outputDir):
 
 ###############################################################################
 
-def analyse_dist(object_array,profilesDict, logFile ):
-    #Loop through and apply district metric
-    from collections import defaultdict
-    import sys
-    matched_array2  =  profilesClass()
-    object_dict=defaultdict(list)
-    for i in object_array:
-        object_dict[i.HNHcontig[:-1]].append(i)
-    counter=0
-    for K in object_dict.keys():
+def analyse_dist(object_array,profilesDict, logFile, args):
 
-        counter+=1
+    if args.single==False:
+        #Loop through and apply district metric
+        from collections import defaultdict
+        import sys
+        matched_array2  =  profilesClass()
+        object_dict=defaultdict(list)
+        for i in object_array:
+            object_dict[i.HNHcontig[:-1]].append(i)
+        counter=0
+        for K in object_dict.keys():
 
-        for i in object_dict[K]:
-            for j in object_dict[K]:
-                if i.coltype==j.coltype:
-                    if i.MATCH=='profile2' and j.MATCH=='profile1':
+            counter+=1
 
-                        if i.HNHstart-j.HNHstop >=0 and i.HNHstart-j.HNHstop<=int(profilesDict[i.coltype][2]):
-                            j.IMMstart  = i.HNHstart
-                            j.IMMstop   = i.HNHstop
-                            j.IMMcontig = i.HNHcontig
+            for i in object_dict[K]:
+                for j in object_dict[K]:
+                    if i.coltype==j.coltype:
+                        if i.MATCH=='profile2' and j.MATCH=='profile1':
 
-                            j.MATCH="TRUE"
+                            if i.HNHstart-j.HNHstop >=0 and i.HNHstart-j.HNHstop<=int(profilesDict[i.coltype][2]):
+                                j.IMMstart  = i.HNHstart
+                                j.IMMstop   = i.HNHstop
+                                j.IMMcontig = i.HNHcontig
 
-                            matched_array2.append(j)
+                                j.MATCH="TRUE"
 
-    profiles_count = matched_array2.count_profiles()
+                                matched_array2.append(j)
 
+        profiles_count = matched_array2.count_profiles()
+
+    else:
+        print 'Skipping Distance check as profile is Single'
     return  matched_array2
 
 
