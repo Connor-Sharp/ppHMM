@@ -1,10 +1,10 @@
-#ppHMM to Identify Colicin-like Bacteriocins
+# ppHMM to Identify Colicin-like Bacteriocins
 
 [![python2](https://img.shields.io/badge/python-2.7-blue.svg)](https://biopython.org/wiki/Download)
 
 A simple python script to identify two linked pair-profile Hidden Markov Models (ppHMM) from the output of a HMMer search. This pipeline is intended to identify the cytotoxic domain and corresponding immunity protein of large colicin like nuclease bacteriocins. However, this pipeline can be adapted to identify any two pHMMs which are associated with each other.
 
-##Dependencies
+## Dependencies
 
 ppHMM requires a few python packages which might not be standard and some fairly common bioinformatics software to run
 
