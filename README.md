@@ -32,10 +32,12 @@ Nuclease bacteriocins (NBs) are potent antimicrobial proteins which can degrade 
 - ```-o --orf``` Directory containing the open reading frame predictions for contigs containing the ppHMM hits
 - ```-p --profile``` "Text file with names of profiles to be identified formatted as: NAME,1st-profile,2nd-profile,inter-profile-distance"
 
+
 ###### Optional
 - ```-m --meta``` Metadata file. Allows ppHMM to find genome files if filenames differ. Also contains species and other information
 - ```-r``` Pfam HMM file with binaries. Gives the user the option to remove sequences based on the Pfam domains they contain
 - ```-rc``` Pfam HMM file with binaries. Clusters the sequences at 98% sequence identity using cd-hit and removes entire clusters based on Pfam domains
+- ```-s --single``` "If only 1 profile is to be identified. Profile file should be NAME,profile,-,-"
 
 ```-fin```
 
@@ -43,7 +45,7 @@ ppHMM Does not perform the HMMscan itself. To identify the two pHMMs, hmmscan sh
 
 ```-p```
 
-A comma separated file containing the 'NAME' of the profile, the N-pHMM (e.g. NB cytotoxic domain), the C-pHMM (e.g. NB immunity protein), the maximum intergenic region allowed (bp) e.g.
+A comma separated file containing the 'NAME' of the profile, the N-pHMM (e.g. NB cytotoxic domain), the C-pHMM (e.g. NB immunity protein), the maximum intergenic region allowed (bp) e.g. If only profile is used, the file should look like: NAME,Profile,-,-
 
 ```
 HNH,Colicin-DNase,Colicin_Pyocin,60
@@ -58,7 +60,10 @@ If the user is only interested in a certain family of proteins that contain the 
 
 Open reading frames often make mistakes at the N-terminus. As this region can contain important information about toxin secretion pathways, sequences are clustered at 98% sequence identity and the profiles of the longest sequence are used to include to remove the entire cluster. Gives increased accuracy but can remove some allowed sequences.
 
-##Outputs
+```-s```
+Used when you dont want the ppHMM search and are only using a single profile. If only profile is used, the profile file should look like: NAME,Profile,-,-
+
+## Outputs
 
 The ppHMM will output a summary html containing some basic statistics of the run and a comma separated file of all the hits identified. The html will incorporate a couple of handy plots of the data which are also available as '.svg' files. All of these files will be placed into a directory created when you run the script. The directory will be named after the time of the run. If multiple runs are being performed at the same time then they will be created with an additional suffix do _N until a unique filename is achieved. Output will also include four fasta files of sequences which have passed and failed the profile inspection, one for each profile in the ppHMM pair (if your profiles are in the same ORF it will return the C-terminal ORF).
 
