@@ -56,8 +56,8 @@ def main():
 
 	optional.add_argument("-rc","--Cluster", dest="cluster", metavar="FILE",
 		help='Sequences will be clustered (0.95 seqid) before pfam removal', required=False)
-	optional.add_argument("-s","--single", dest="single", metavar="FILE",
-		help='Sequences will be clustered (0.95 seqid) before pfam removal', action='store_true',required=False)
+	optional.add_argument("-s","--single", dest="single",
+		help='If only 1 profile is to be identified. Profile file should be NAME,profile,-,-', action='store_true',required=False)
 
 	args = parser.parse_args()
 
@@ -107,7 +107,7 @@ def main():
 	from functions import analyse
 	object_array=[]
 	object_array = analyse(object_array, args.myFilenameOut, profileDict, logFile, outputDir)
-
+	print 'Passed before Distance check: {}'.format(len(object_array))
 	from functions import plot_dist
 	plot_dist(object_array,profileDict,outputDir,logFile, args)
 
@@ -117,11 +117,18 @@ def main():
 	from functions import profilesClass
 	matched_array=profilesClass()
 	temp_array=profilesClass()
+	mat_array=profilesClass()
 
 
 	from functions import analyse_dist
-	matched_array = analyse_dist(object_array,profileDict, logFile)
+
+	matched_array = analyse_dist(object_array,profileDict,logFile, args)
+	print 'Passed after Distance check: {}'.format(len(matched_array))
 	test_arrayClean = profilesClass()
+	for i in matched_array[:50]:
+		mat_array.append(i)
+	matched_array=mat_array
+
 	#id,isolate,species ,Genome file
 	if args.METAfile:
 		metaDict=defaultdict(list)
@@ -207,7 +214,6 @@ def main():
 					passed +=1
 				else:
 					failed +=1
-				print i.identifier, i.seqid, i.profiles,len(i.HNHsequence),i.profilePass
 		logFile.profileAnalysis( args, passed, failed)
 
 

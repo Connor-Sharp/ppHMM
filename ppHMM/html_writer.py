@@ -204,13 +204,16 @@ class html_writer:
 		self.file_handle.write("</table>")
 		self.file_handle.write('</div>')
 
-	def interProfile(self, pygalPath):
+	def interProfile(self, args, pygalPath):
 		StartTab = """
 		<div id='Interprofile' class="tabcontent">
 			<h3>Inter-profile Distances</h3>
 		"""
 		self.file_handle.write(StartTab)
-		self.pygalWrite(pygalPath)
+		if args.single:
+			self.file_handle.write('<p>You selected to scan for only a single profile</p>')
+		else:
+			self.pygalWrite(pygalPath)
 		self.file_handle.write('</div>')
 
 	def finish(self):
@@ -219,7 +222,7 @@ class html_writer:
 	def profileAnalysis(self,args, passed, failed):
 		StartTab = """
 		<div id='profileAnalysis' class="tabcontent">
-			<h3>Inter-profile Distances</h3>
+			<h3>Profiles identified</h3>
 		"""
 		self.file_handle.write(StartTab)
 		if args.cluster or args.remove:

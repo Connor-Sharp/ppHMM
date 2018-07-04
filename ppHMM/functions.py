@@ -15,8 +15,7 @@ def analyse(object_array,filename, profilesDict, logFile, outputDir):
         if len(profilesDict[i])>2:
             leftDict[profilesDict[i][0]]=[i, 'profile1']
             leftDict[profilesDict[i][1]]=[i, 'profile2']
-        else:
-            leftDict[profilesDict[i][0]]=[i, 'SINGLE']
+
     hmmerOutput = open(filename, 'r')
 
     E_counter=0
@@ -91,7 +90,14 @@ def analyse(object_array,filename, profilesDict, logFile, outputDir):
 
 def analyse_dist(object_array,profilesDict, logFile, args):
 
-    if args.single==False:
+    if args.single:
+        print 'Skipping Distance check as profile is Single'
+        matched_array2  =  profilesClass()
+        for i in object_array:
+            matched_array2.append(i)
+
+
+    else:
         #Loop through and apply district metric
         from collections import defaultdict
         import sys
@@ -119,9 +125,6 @@ def analyse_dist(object_array,profilesDict, logFile, args):
                                 matched_array2.append(j)
 
         profiles_count = matched_array2.count_profiles()
-
-    else:
-        print 'Skipping Distance check as profile is Single'
     return  matched_array2
 
 
@@ -129,7 +132,7 @@ def analyse_dist(object_array,profilesDict, logFile, args):
 
 
 
-def plot_dist(object_array, profilesDict, outputDir, logFile):
+def plot_dist(object_array, profilesDict, outputDir, logFile, args):
     from collections import defaultdict
     import sys
     import os
@@ -167,7 +170,7 @@ def plot_dist(object_array, profilesDict, outputDir, logFile):
     interProfilePath = os.path.join(outputDir, 'InterProfileHist.svg')
     hist.render_to_file(interProfilePath)
 
-    logFile.interProfile(interProfilePath)
+    logFile.interProfile(args, interProfilePath)
 
 
 
@@ -439,12 +442,10 @@ class profilesClass(list):
             #start and end points of motifs
             endposHNH  =  search.HNHstop
             startposHNH  =  search.HNHstart
-            endposIMM  =  search.IMMstop
-            startposIMM  =  search.IMMstart
+
 
             #get the contigs
             HNHcontig  =  search.HNHcontig
-            IMMcontig  =  search.IMMcontig
             collect  =  ""
             #FRAME
             frameHNH=int(HNHcontig[-1:])
