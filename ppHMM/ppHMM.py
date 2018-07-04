@@ -117,17 +117,12 @@ def main():
 	from functions import profilesClass
 	matched_array=profilesClass()
 	temp_array=profilesClass()
-	mat_array=profilesClass()
-
-
+	
 	from functions import analyse_dist
 
 	matched_array = analyse_dist(object_array,profileDict,logFile, args)
 	print 'Passed after Distance check: {}'.format(len(matched_array))
 	test_arrayClean = profilesClass()
-	for i in matched_array[:50]:
-		mat_array.append(i)
-	matched_array=mat_array
 
 	#id,isolate,species ,Genome file
 	if args.METAfile:
